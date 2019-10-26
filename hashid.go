@@ -24,21 +24,12 @@ const (
 	CRC_24
 	CRC_32
 	Eggdrop_IRC_Bot
+	DES_UNIX
+	Traditional_DES
+	DEScrypt,
 )
 
-type Prototype struct {
-	Re    *regexp.Regexp
-	Modes []HashInfo
-}
-
-type HashInfo struct {
-	ID       HashID
-	Hashcat  string
-	John     string
-	Extended bool
-}
-
-var HashNames = map[HashID]string{
+const HashNames = map[HashID]string{
 	CRC_16:          "CRC-16",
 	CRC_16_CCITT:    "CRC-16-CCITT",
 	FCS_16:          "FCS-16",
@@ -55,6 +46,22 @@ var HashNames = map[HashID]string{
 	CRC_24:          "CRC-24",
 	CRC_32:          "CRC-32",
 	Eggdrop_IRC_Bot: "Eggdrop IRC Bot",
+DES_UNIX: "DES(Unix)",
+Traditional_DES:"Traditional DES",
+DEScrypt:"DEScrypt",
+}
+
+
+type Prototype struct {
+	Re    *regexp.Regexp
+	Modes []HashInfo
+}
+
+type HashInfo struct {
+	ID       HashID
+	Hashcat  string
+	John     string
+	Extended bool
 }
 
 func (hi HashInfo) Name() string {
@@ -104,6 +111,14 @@ func GetDefaultPrototypes() []Prototype {
 				{ID: Eggdrop_IRC_Bot, Hashcat: "", John: "bfegg", Extended: false},
 			},
 		},
+		{
+			regexp.MustCompile("(?i)^[a-z0-9\\/.]{13}$"),
+			[]HashInfo{
+				{Name:"DES(Unix)", Hashcat: 1500, John: "descrypt", Extended: false},
+				{Name:"Traditional DES", Hashcat: 1500, John: "descrypt", Extended: false},
+				{Name:"DEScrypt", Hashcat: 1500, John: "descrypt", Extended: false},
+			}
+		}
 	}
 }
 
