@@ -26,6 +26,12 @@ func TestIdentify(t *testing.T) {
 			[]HashID{CRC_16, CRC_16_CCITT, FCS_16},
 			false,
 		},
+		{
+			"CRC-16",
+			"FFFFFFFF",
+			[]HashID{Adler_32, CRC_32B, FCS_32, Ghash_32_3, Ghash_32_5, FNV_132, Fletcher_32, Joaat, ELF_32, XOR_32},
+			false,
+		},
 	}
 
 	dp := GetDefaultPrototypes()
