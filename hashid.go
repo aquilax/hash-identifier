@@ -21,6 +21,7 @@ const (
 	Joaat
 	ELF_32
 	XOR_32
+	CRC_24
 )
 
 type Prototype struct {
@@ -59,6 +60,12 @@ func GetDefaultPrototypes() []Prototype {
 				{ID: Joaat, Name: "Joaat", Hashcat: nil, John: nil, Extended: false},
 				{ID: ELF_32, Name: "ELF-32", Hashcat: nil, John: nil, Extended: false},
 				{ID: XOR_32, Name: "XOR-32", Hashcat: nil, John: nil, Extended: false},
+			},
+		},
+		{
+			regexp.MustCompile("(?i)^[a-f0-9]{6}$"),
+			[]HashInfo{
+				{ID: CRC_24, Name: "CRC-24", Hashcat: nil, John: nil, Extended: false},
 			},
 		},
 	}
