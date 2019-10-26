@@ -24,16 +24,16 @@ const (
 )
 
 type Prototype struct {
-	re    *regexp.Regexp
-	modes []HashInfo
+	Re    *regexp.Regexp
+	Modes []HashInfo
 }
 
 type HashInfo struct {
-	hashID   HashID
-	name     string
-	hashcat  *string
-	john     *string
-	extended bool
+	ID       HashID
+	Name     string
+	Hashcat  *string
+	John     *string
+	Extended bool
 }
 
 func GetDefaultPrototypes() []Prototype {
@@ -41,36 +41,36 @@ func GetDefaultPrototypes() []Prototype {
 		{
 			regexp.MustCompile("(?i)^[a-f0-9]{4}$"),
 			[]HashInfo{
-				{hashID: CRC_16, name: "CRC-16", extended: false},
-				{hashID: CRC_16_CCITT, name: "CRC-16-CCITT", extended: false},
-				{hashID: FCS_16, name: "FCS-16", extended: false},
+				{ID: CRC_16, Name: "CRC-16", Extended: false},
+				{ID: CRC_16_CCITT, Name: "CRC-16-CCITT", Extended: false},
+				{ID: FCS_16, Name: "FCS-16", Extended: false},
 			},
 		},
 		{
 			regexp.MustCompile("(?i)^[a-f0-9]{8}$"),
 			[]HashInfo{
-				{hashID: Adler_32, name: "Adler-32", hashcat: nil, john: nil, extended: false},
-				{hashID: CRC_32B, name: "CRC-32B", hashcat: nil, john: nil, extended: false},
-				{hashID: FCS_32, name: "FCS-32", hashcat: nil, john: nil, extended: false},
-				{hashID: Ghash_32_3, name: "GHash-32-3", hashcat: nil, john: nil, extended: false},
-				{hashID: Ghash_32_5, name: "GHash-32-5", hashcat: nil, john: nil, extended: false},
-				{hashID: FNV_132, name: "FNV-132", hashcat: nil, john: nil, extended: false},
-				{hashID: Fletcher_32, name: "Fletcher-32", hashcat: nil, john: nil, extended: false},
-				{hashID: Joaat, name: "Joaat", hashcat: nil, john: nil, extended: false},
-				{hashID: ELF_32, name: "ELF-32", hashcat: nil, john: nil, extended: false},
-				{hashID: XOR_32, name: "XOR-32", hashcat: nil, john: nil, extended: false},
+				{ID: Adler_32, Name: "Adler-32", Hashcat: nil, John: nil, Extended: false},
+				{ID: CRC_32B, Name: "CRC-32B", Hashcat: nil, John: nil, Extended: false},
+				{ID: FCS_32, Name: "FCS-32", Hashcat: nil, John: nil, Extended: false},
+				{ID: Ghash_32_3, Name: "GHash-32-3", Hashcat: nil, John: nil, Extended: false},
+				{ID: Ghash_32_5, Name: "GHash-32-5", Hashcat: nil, John: nil, Extended: false},
+				{ID: FNV_132, Name: "FNV-132", Hashcat: nil, John: nil, Extended: false},
+				{ID: Fletcher_32, Name: "Fletcher-32", Hashcat: nil, John: nil, Extended: false},
+				{ID: Joaat, Name: "Joaat", Hashcat: nil, John: nil, Extended: false},
+				{ID: ELF_32, Name: "ELF-32", Hashcat: nil, John: nil, Extended: false},
+				{ID: XOR_32, Name: "XOR-32", Hashcat: nil, John: nil, Extended: false},
 			},
 		},
 	}
 }
 
-func Identify(hash []byte, prototypes []Prototype) ([]HashInfo, error) {
+func Identify(hash []byte, pr []Prototype) ([]HashInfo, error) {
 	var i, j int
 	var result []HashInfo
-	for i = range prototypes {
-		if prototypes[i].re.Match(hash) {
-			for j = range prototypes[i].modes {
-				result = append(result, prototypes[i].modes[j])
+	for i = range pr {
+		if pr[i].Re.Match(hash) {
+			for j = range pr[i].Modes {
+				result = append(result, pr[i].Modes[j])
 			}
 		}
 	}
