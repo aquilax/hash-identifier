@@ -22,6 +22,7 @@ const (
 	ELF_32
 	XOR_32
 	CRC_24
+	CRC_32
 )
 
 type Prototype struct {
@@ -31,10 +32,31 @@ type Prototype struct {
 
 type HashInfo struct {
 	ID       HashID
-	Name     string
-	Hashcat  *string
-	John     *string
+	Hashcat  string
+	John     string
 	Extended bool
+}
+
+var HashNames = map[HashID]string{
+	CRC_16:       "CRC-16",
+	CRC_16_CCITT: "CRC-16-CCITT",
+	FCS_16:       "FCS-16",
+	Adler_32:     "Adler-32",
+	CRC_32B:      "CRC-32B",
+	FCS_32:       "FCS-32",
+	Ghash_32_3:   "GHash-32-3",
+	Ghash_32_5:   "GHash-32-5",
+	FNV_132:      "FNV-132",
+	Fletcher_32:  "Fletcher-32",
+	Joaat:        "Joaat",
+	ELF_32:       "ELF-32",
+	XOR_32:       "XOR-32",
+	CRC_24:       "CRC-24",
+	CRC_32:       "CRC-32",
+}
+
+func (hi HashInfo) Name() string {
+	return HashNames[hi.ID]
 }
 
 func GetDefaultPrototypes() []Prototype {
@@ -42,30 +64,36 @@ func GetDefaultPrototypes() []Prototype {
 		{
 			regexp.MustCompile("(?i)^[a-f0-9]{4}$"),
 			[]HashInfo{
-				{ID: CRC_16, Name: "CRC-16", Extended: false},
-				{ID: CRC_16_CCITT, Name: "CRC-16-CCITT", Extended: false},
-				{ID: FCS_16, Name: "FCS-16", Extended: false},
+				{ID: CRC_16, Hashcat: "", John: "", Extended: false},
+				{ID: CRC_16_CCITT, Hashcat: "", John: "", Extended: false},
+				{ID: FCS_16, Hashcat: "", John: "", Extended: false},
 			},
 		},
 		{
 			regexp.MustCompile("(?i)^[a-f0-9]{8}$"),
 			[]HashInfo{
-				{ID: Adler_32, Name: "Adler-32", Hashcat: nil, John: nil, Extended: false},
-				{ID: CRC_32B, Name: "CRC-32B", Hashcat: nil, John: nil, Extended: false},
-				{ID: FCS_32, Name: "FCS-32", Hashcat: nil, John: nil, Extended: false},
-				{ID: Ghash_32_3, Name: "GHash-32-3", Hashcat: nil, John: nil, Extended: false},
-				{ID: Ghash_32_5, Name: "GHash-32-5", Hashcat: nil, John: nil, Extended: false},
-				{ID: FNV_132, Name: "FNV-132", Hashcat: nil, John: nil, Extended: false},
-				{ID: Fletcher_32, Name: "Fletcher-32", Hashcat: nil, John: nil, Extended: false},
-				{ID: Joaat, Name: "Joaat", Hashcat: nil, John: nil, Extended: false},
-				{ID: ELF_32, Name: "ELF-32", Hashcat: nil, John: nil, Extended: false},
-				{ID: XOR_32, Name: "XOR-32", Hashcat: nil, John: nil, Extended: false},
+				{ID: Adler_32, Hashcat: "", John: "", Extended: false},
+				{ID: CRC_32B, Hashcat: "", John: "", Extended: false},
+				{ID: FCS_32, Hashcat: "", John: "", Extended: false},
+				{ID: Ghash_32_3, Hashcat: "", John: "", Extended: false},
+				{ID: Ghash_32_5, Hashcat: "", John: "", Extended: false},
+				{ID: FNV_132, Hashcat: "", John: "", Extended: false},
+				{ID: Fletcher_32, Hashcat: "", John: "", Extended: false},
+				{ID: Joaat, Hashcat: "", John: "", Extended: false},
+				{ID: ELF_32, Hashcat: "", John: "", Extended: false},
+				{ID: XOR_32, Hashcat: "", John: "", Extended: false},
 			},
 		},
 		{
 			regexp.MustCompile("(?i)^[a-f0-9]{6}$"),
 			[]HashInfo{
-				{ID: CRC_24, Name: "CRC-24", Hashcat: nil, John: nil, Extended: false},
+				{ID: CRC_24, Hashcat: "", John: "", Extended: false},
+			},
+		},
+		{
+			regexp.MustCompile("(?i)^(\\$crc32\\$[a-f0-9]{8}.)?[a-f0-9]{8}$"),
+			[]HashInfo{
+				{ID: CRC_32, Hashcat: "", John: "crc32", Extended: false},
 			},
 		},
 	}
