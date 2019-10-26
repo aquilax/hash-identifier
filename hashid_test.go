@@ -20,15 +20,11 @@ func TestIdentify(t *testing.T) {
 	}{
 		{
 			"C061",
-			[]HashID{CRC_16, CRC_16_CCITT, FCS_16},
-		},
-		{
-			"FFFFFFFF",
-			[]HashID{Adler_32, CRC_32B, FCS_32, Ghash_32_3, Ghash_32_5, FNV_132, Fletcher_32, Joaat, ELF_32, XOR_32, CRC_32},
+			[]HashID{CRC_16, CRC_16_CCITT, FCS_16, Cisco_Type_7},
 		},
 		{
 			"FFFFFF",
-			[]HashID{CRC_24},
+			[]HashID{CRC_24, Cisco_Type_7},
 		},
 		{
 			"$crc32$11111111:FFFFFFFF",
