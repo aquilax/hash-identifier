@@ -8,7 +8,7 @@ import (
 func getIds(hi []HashInfo) []HashID {
 	var result []HashID
 	for i := range hi {
-		result = append(result, hi[i].hashID)
+		result = append(result, hi[i].ID)
 	}
 	return result
 }
