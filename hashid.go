@@ -23,6 +23,7 @@ const (
 	XOR_32
 	CRC_24
 	CRC_32
+	Eggdrop_IRC_Bot
 )
 
 type Prototype struct {
@@ -38,21 +39,22 @@ type HashInfo struct {
 }
 
 var HashNames = map[HashID]string{
-	CRC_16:       "CRC-16",
-	CRC_16_CCITT: "CRC-16-CCITT",
-	FCS_16:       "FCS-16",
-	Adler_32:     "Adler-32",
-	CRC_32B:      "CRC-32B",
-	FCS_32:       "FCS-32",
-	Ghash_32_3:   "GHash-32-3",
-	Ghash_32_5:   "GHash-32-5",
-	FNV_132:      "FNV-132",
-	Fletcher_32:  "Fletcher-32",
-	Joaat:        "Joaat",
-	ELF_32:       "ELF-32",
-	XOR_32:       "XOR-32",
-	CRC_24:       "CRC-24",
-	CRC_32:       "CRC-32",
+	CRC_16:          "CRC-16",
+	CRC_16_CCITT:    "CRC-16-CCITT",
+	FCS_16:          "FCS-16",
+	Adler_32:        "Adler-32",
+	CRC_32B:         "CRC-32B",
+	FCS_32:          "FCS-32",
+	Ghash_32_3:      "GHash-32-3",
+	Ghash_32_5:      "GHash-32-5",
+	FNV_132:         "FNV-132",
+	Fletcher_32:     "Fletcher-32",
+	Joaat:           "Joaat",
+	ELF_32:          "ELF-32",
+	XOR_32:          "XOR-32",
+	CRC_24:          "CRC-24",
+	CRC_32:          "CRC-32",
+	Eggdrop_IRC_Bot: "Eggdrop IRC Bot",
 }
 
 func (hi HashInfo) Name() string {
@@ -94,6 +96,12 @@ func GetDefaultPrototypes() []Prototype {
 			regexp.MustCompile("(?i)^(\\$crc32\\$[a-f0-9]{8}.)?[a-f0-9]{8}$"),
 			[]HashInfo{
 				{ID: CRC_32, Hashcat: "", John: "crc32", Extended: false},
+			},
+		},
+		{
+			regexp.MustCompile("(?i)^\\+[a-z0-9\\/.]{12}$"),
+			[]HashInfo{
+				{ID: Eggdrop_IRC_Bot, Hashcat: "", John: "bfegg", Extended: false},
 			},
 		},
 	}
