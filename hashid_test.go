@@ -18,18 +18,14 @@ func TestIdentify(t *testing.T) {
 		hash string
 		want []HashID
 	}{
-		{
-			"C061",
-			[]HashID{CRC_16, CRC_16_CCITT, FCS_16, Cisco_Type_7},
-		},
-		{
-			"FFFFFF",
-			[]HashID{CRC_24, Cisco_Type_7},
-		},
-		{
-			"$crc32$11111111:FFFFFFFF",
-			[]HashID{CRC_32},
-		},
+		{"C061", []HashID{CRC_16, CRC_16_CCITT, FCS_16, Cisco_Type_7}},
+		{"FFFFFF", []HashID{CRC_24, Cisco_Type_7}},
+		{"$crc32$11111111:FFFFFFFF", []HashID{CRC_32}},
+		{"ghp_AABBCC", []HashID{GitHub_Personal_Access_Token}},
+		{"gho_AABBCC", []HashID{GitHub_OAuth_Access_Token}},
+		{"ghu_AABBCC", []HashID{GitHub_App_User_To_Server_Token}},
+		{"ghs_AABBCC", []HashID{GitHub_App_Server_To_Server_Token}},
+		{"ghr_AABBCC", []HashID{GitHub_App_Refresh_Token}},
 	}
 
 	dp := GetDefaultPrototypes()

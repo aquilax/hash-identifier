@@ -276,6 +276,11 @@ const (
 	Dahua
 	MySQL_Challenge_Response_Authentication_SHA1
 	PDF_1_4_1_6_Acrobat_5_8
+	GitHub_Personal_Access_Token
+	GitHub_OAuth_Access_Token
+	GitHub_App_User_To_Server_Token
+	GitHub_App_Server_To_Server_Token
+	GitHub_App_Refresh_Token
 )
 
 var HashNames = map[HashID]string{
@@ -546,6 +551,11 @@ var HashNames = map[HashID]string{
 	Dahua:                  "Dahua",
 	MySQL_Challenge_Response_Authentication_SHA1: "MySQL Challenge-Response Authentication (SHA1)",
 	PDF_1_4_1_6_Acrobat_5_8:                      "PDF 1.4 - 1.6 (Acrobat 5 - 8)",
+	GitHub_Personal_Access_Token:                 "GitHub Personal Access Token",
+	GitHub_OAuth_Access_Token:                    "GitHub OAuth access tokens",
+	GitHub_App_User_To_Server_Token:              "GitHub App user-to-server tokens",
+	GitHub_App_Server_To_Server_Token:            "GitHub App server-to-server tokens",
+	GitHub_App_Refresh_Token:                     "GitHub App refresh tokens",
 }
 
 type Prototype struct {
@@ -1561,6 +1571,36 @@ func GetDefaultPrototypes() []Prototype {
 			regexp.MustCompile("(?i)^\\$pdf\\$[24]\\*[34]\\*128\\*[0-9-]{1,5}\\*1\\*(16|32)\\*[a-f0-9]{32,64}\\*32\\*[a-f0-9]{64}\\*(8|16|32)\\*[a-f0-9]{16,64}$"),
 			[]HashInfo{
 				{ID: PDF_1_4_1_6_Acrobat_5_8, Hashcat: "10500", John: "10500", Extended: false},
+			},
+		},
+		{
+			regexp.MustCompile("ghp_[A-Za-z0-9_]{1,255}"),
+			[]HashInfo{
+				{ID: GitHub_Personal_Access_Token, Hashcat: "", John: "", Extended: false},
+			},
+		},
+		{
+			regexp.MustCompile("gho_[A-Za-z0-9_]{1,255}"),
+			[]HashInfo{
+				{ID: GitHub_OAuth_Access_Token, Hashcat: "", John: "", Extended: false},
+			},
+		},
+		{
+			regexp.MustCompile("ghu_[A-Za-z0-9_]{1,255}"),
+			[]HashInfo{
+				{ID: GitHub_App_User_To_Server_Token, Hashcat: "", John: "", Extended: false},
+			},
+		},
+		{
+			regexp.MustCompile("ghs_[A-Za-z0-9_]{1,255}"),
+			[]HashInfo{
+				{ID: GitHub_App_Server_To_Server_Token, Hashcat: "", John: "", Extended: false},
+			},
+		},
+		{
+			regexp.MustCompile("ghr_[A-Za-z0-9_]{1,255}"),
+			[]HashInfo{
+				{ID: GitHub_App_Refresh_Token, Hashcat: "", John: "", Extended: false},
 			},
 		},
 	}
