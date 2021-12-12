@@ -281,6 +281,16 @@ const (
 	GitHub_App_User_To_Server_Token
 	GitHub_App_Server_To_Server_Token
 	GitHub_App_Refresh_Token
+	Slack_Bot_Token
+	Slack_User_Token
+	Slack_Refresh_Token
+	Slack_Config_Access_Token
+	Stripe_Test_Mode_Secret_Key
+	Stripe_Live_Mode_Secret_Key
+	Stripe_Test_Mode_Publishable_Key
+	Stripe_Live_Mode_Publishable_Key
+	Stripe_Test_Mode_Restricted_Key
+	Stripe_Live_Mode_Restricted_Key
 )
 
 var HashNames = map[HashID]string{
@@ -556,6 +566,16 @@ var HashNames = map[HashID]string{
 	GitHub_App_User_To_Server_Token:              "GitHub App user-to-server tokens",
 	GitHub_App_Server_To_Server_Token:            "GitHub App server-to-server tokens",
 	GitHub_App_Refresh_Token:                     "GitHub App refresh tokens",
+	Slack_Bot_Token:                              "Slack Bot Token",
+	Slack_User_Token:                             "Slack User Token",
+	Slack_Refresh_Token:                          "Slack Refresh Token",
+	Slack_Config_Access_Token:                    "Slack Config Access Token",
+	Stripe_Test_Mode_Secret_Key:                  "Stripe Test Mode Secret Key",
+	Stripe_Live_Mode_Secret_Key:                  "Stripe Live Mode Secret Key",
+	Stripe_Test_Mode_Publishable_Key:             "Stripe Test Mode Publishable Key",
+	Stripe_Live_Mode_Publishable_Key:             "Stripe Live Mode Publishable Key",
+	Stripe_Test_Mode_Restricted_Key:              "Stripe Test Mode Restricted Key",
+	Stripe_Live_Mode_Restricted_Key:              "Stripe Live Mode Restricted Key",
 }
 
 type Prototype struct {
@@ -1574,33 +1594,93 @@ func GetDefaultPrototypes() []Prototype {
 			},
 		},
 		{
-			regexp.MustCompile("ghp_[A-Za-z0-9_]{1,255}"),
+			regexp.MustCompile("^ghp_[A-Za-z0-9_]{1,255}"),
 			[]HashInfo{
 				{ID: GitHub_Personal_Access_Token, Hashcat: "", John: "", Extended: false},
 			},
 		},
 		{
-			regexp.MustCompile("gho_[A-Za-z0-9_]{1,255}"),
+			regexp.MustCompile("^gho_[A-Za-z0-9_]{1,255}"),
 			[]HashInfo{
 				{ID: GitHub_OAuth_Access_Token, Hashcat: "", John: "", Extended: false},
 			},
 		},
 		{
-			regexp.MustCompile("ghu_[A-Za-z0-9_]{1,255}"),
+			regexp.MustCompile("^ghu_[A-Za-z0-9_]{1,255}"),
 			[]HashInfo{
 				{ID: GitHub_App_User_To_Server_Token, Hashcat: "", John: "", Extended: false},
 			},
 		},
 		{
-			regexp.MustCompile("ghs_[A-Za-z0-9_]{1,255}"),
+			regexp.MustCompile("^ghs_[A-Za-z0-9_]{1,255}"),
 			[]HashInfo{
 				{ID: GitHub_App_Server_To_Server_Token, Hashcat: "", John: "", Extended: false},
 			},
 		},
 		{
-			regexp.MustCompile("ghr_[A-Za-z0-9_]{1,255}"),
+			regexp.MustCompile("^ghr_[A-Za-z0-9_]{1,255}"),
 			[]HashInfo{
 				{ID: GitHub_App_Refresh_Token, Hashcat: "", John: "", Extended: false},
+			},
+		},
+		{
+			regexp.MustCompile("^xoxb-[A-Za-z0-9\\-]{1,255}"),
+			[]HashInfo{
+				{ID: Slack_Bot_Token, Hashcat: "", John: "", Extended: false},
+			},
+		},
+		{
+			regexp.MustCompile("^xoxp-[A-Za-z0-9\\-]{1,255}"),
+			[]HashInfo{
+				{ID: Slack_User_Token, Hashcat: "", John: "", Extended: false},
+			},
+		},
+		{
+			regexp.MustCompile("^xoxe-[A-Za-z0-9\\-]{1,255}"),
+			[]HashInfo{
+				{ID: Slack_Refresh_Token, Hashcat: "", John: "", Extended: false},
+			},
+		},
+		{
+			regexp.MustCompile("^xoxe.xoxp-[A-Za-z0-9\\-]{1,255}"),
+			[]HashInfo{
+				{ID: Slack_Config_Access_Token, Hashcat: "", John: "", Extended: false},
+			},
+		},
+		{
+			regexp.MustCompile("^sk_test_[A-Za-z0-9\\-]{1,255}"),
+			[]HashInfo{
+				{ID: Stripe_Test_Mode_Secret_Key, Hashcat: "", John: "", Extended: false},
+			},
+		},
+		{
+			regexp.MustCompile("^sk_live_[A-Za-z0-9\\-]{1,255}"),
+			[]HashInfo{
+				{ID: Stripe_Live_Mode_Secret_Key, Hashcat: "", John: "", Extended: false},
+			},
+		},
+		{
+			regexp.MustCompile("^pk_test_[A-Za-z0-9\\-]{1,255}"),
+			[]HashInfo{
+				{ID: Stripe_Test_Mode_Publishable_Key, Hashcat: "", John: "", Extended: false},
+			},
+		},
+		{
+			regexp.MustCompile("^pk_live_[A-Za-z0-9\\-]{1,255}"),
+			[]HashInfo{
+				{ID: Stripe_Live_Mode_Publishable_Key, Hashcat: "", John: "", Extended: false},
+			},
+		},
+		{
+			regexp.MustCompile("^rk_test_[A-Za-z0-9\\-]{1,255}"),
+			[]HashInfo{
+				{ID: Stripe_Test_Mode_Restricted_Key, Hashcat: "", John: "", Extended: false},
+			},
+		},
+		{
+			regexp.MustCompile("^rk_live_[A-Za-z0-9\\-]{1,255}"),
+			[]HashInfo{
+				{ID: Stripe_Live_Mode_Restricted_Key, Hashcat: "", John: "", Extended: false},
 			},
 		},
 	}

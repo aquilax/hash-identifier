@@ -26,6 +26,12 @@ func TestIdentify(t *testing.T) {
 		{"ghu_AABBCC", []HashID{GitHub_App_User_To_Server_Token}},
 		{"ghs_AABBCC", []HashID{GitHub_App_Server_To_Server_Token}},
 		{"ghr_AABBCC", []HashID{GitHub_App_Refresh_Token}},
+		{"xoxb-17653672481-19874698323-pdFZKVeTuE8sk7oOcBrzbqgy", []HashID{Slack_Bot_Token}},
+		{"xoxp-1234", []HashID{Slack_User_Token}},
+		{"xoxe-1-abcdefg", []HashID{Slack_Refresh_Token}},
+		{"xoxe.xoxp-2-abcdefg", []HashID{Slack_Config_Access_Token}},
+		{"pk_test_4QHSdRjQiwkzokPPCiK33eOq", []HashID{Stripe_Test_Mode_Publishable_Key}},
+		{"sk_test_4QHS9UR02FMGKPqdjElznDRI", []HashID{Stripe_Test_Mode_Secret_Key}},
 	}
 
 	dp := GetDefaultPrototypes()
